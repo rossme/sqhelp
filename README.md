@@ -1,24 +1,21 @@
-# README
+# SQHELP
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+**sqhelp** is a simple app designed to help you practice SQL queries. sqhelp provides a user-friendly environment to create, execute, and validate SQL queries.
 
-Things you may want to cover:
+## How it Works
 
-* Ruby version
+### Query Creation
 
-* System dependencies
+sqhelp allows you to create SQL queries using a simple text-based interface. You input your query in plain text, and sqhelp provides real-time feedback on the syntax and potential errors.
 
-* Configuration
+### Query Execution
 
-* Database creation
+Once you've crafted your SQL query, you can execute it against a sample database provided by sqhelp. You'll instantly see the results of your query, allowing you to verify its accuracy and fine-tune it as needed.
 
-* Database initialization
+### Query Validation
 
-* How to run the test suite
+sqhelp provides feedback on your query's correctness, highlighting any syntax errors or potential issues. It helps you understand why a particular query might not be working as expected.
 
-* Services (job queues, cache servers, search engines, etc.)
+---
 
-* Deployment instructions
-
-* ...
+*Thank you for choosing sqhelp to improve your SQL query skills. Refer to this README for an in-depth understanding of sqhelp and its technical details.*
