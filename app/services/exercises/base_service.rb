@@ -26,11 +26,5 @@ module Exercises
     def exercise
       @exercise ||= Exercise.find_by(id: exercise_id)
     end
-
-    # def contains_modification_keyword?
-    #   MODIFICATION_KEYWORDS.any? { |keyword| user_answer =~ /\b#{keyword}\b/i }
-    # end
-    #
-    # MODIFICATION_KEYWORDS = %w[INSERT UPDATE DELETE REPLACE ALTER].freeze
   end
 end

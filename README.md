@@ -1,6 +1,6 @@
 # SQHELP
 
-**sqhelp** is a simple app designed to help you practice SQL queries. sqhelp provides a user-friendly environment to create, execute, and validate SQL queries.
+**sqhelp** is a simple app designed to help users practice SQL queries. sqhelp provides exercises that let you create, execute, and validate SQL queries.
 
 ## How it Works
 
