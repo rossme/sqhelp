@@ -29,7 +29,7 @@ function validateAnswer(userAnswer, event) {
 
   // fetch the list of blacklisted words
   const blacklist= ['DROP', 'DELETE', 'UPDATE', 'INSERT', 'CREATE', 'ALTER', 'DROP', 'DATABASE'];
-  const wordsInAnswer = userAnswer.replace(/[^a-zA-Z]/g, "").split(' ');
+  const wordsInAnswer = userAnswer.replace(/[^a-zA-Z ]/g, "").split(' ');
   const maliciousWords = wordsInAnswer.filter(word => blacklist.includes(word.toUpperCase()));
 
   if (maliciousWords.length > 0) {
@@ -41,7 +41,7 @@ function validateAnswer(userAnswer, event) {
     textArea.value = "";
 
     // display an alert to the user
-    return form.innerHTML = "Your query contains " + maliciousWords.join(', ') + ".";
+    return form.innerHTML = "Your query contains " + maliciousWords.join(', ') + ". This database is read only.";
   }
 
   if (userAnswer.length > 100) {
