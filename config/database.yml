@@ -22,8 +22,14 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
-  database: sqhelp_development
+  primary:
+    <<: *default
+    database: sqhelp_development
+    replica: false
+  primary_replica:
+    <<: *default
+    database: sqhelp_development
+    replica: true
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -80,7 +86,15 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: sqhelp_production
-  username: sqhelp
-  password: <%= ENV["SQHELP_DATABASE_PASSWORD"] %>
+  primary:
+    <<: *default
+    database: sqhelp_production
+    username: sqhelp
+    password: <%= ENV["SQHELP_DATABASE_PASSWORD"] %>
+    replica: false
+  primary_replica:
+    <<: *default
+    database: sqhelp_production
+    username: sqhelp
+    password: <%= ENV["SQHELP_DATABASE_PASSWORD"] %>
+    replica: true

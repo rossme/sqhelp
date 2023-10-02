@@ -1,0 +1,20 @@
+
+<div class="row m-4 justify-content-center">
+  <div class="col-md-8 mb-4">
+    <div class="card">
+      <div class="card-header">
+        <h6 class="lead text-center pt-2">SQL Exercises</h6>
+      </div>
+
+      <div class="row card-body m-4">
+
+        <% @exercises.each_with_index do |exercise, index| %>
+          <code class="py-2">
+            <%= "#{index + 1}" %>. <%= link_to "#{exercise.description}", exercise_path(exercise), class: '' %>
+          </code>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

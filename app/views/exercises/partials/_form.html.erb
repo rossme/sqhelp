@@ -1,0 +1,16 @@
+
+<div class="card <%= @is_successful ? 'border-success' : '' %>">
+  <div class="card-header">
+    <h6 class="lead text-center pt-2">SQL Exercise <%= @exercise.id %></h6>
+  </div>
+  <div class="row card-body m-4">
+    <code class="pb-2"><%= @exercise.description %></code>
+
+    <%= form_with model: @exercise, url: exercises_path, method: :post, data: { controller: "form-validation" } do |form| %>
+      <%= form.hidden_field :exercise_id, value: @exercise.id %>
+      <%= form.text_area :user_answer, class: "form-control form-control-md #{@is_successful ? 'border-success' : '' }", rows: 8, data: { target: "form-validation.textarea" } %>
+      <%= form.button 'Submit', class: 'btn btn-light text-secondary border mt-2', data: { action: "form-validation#validate" } %>
+    <% end %>
+
+  </div>
+</div>

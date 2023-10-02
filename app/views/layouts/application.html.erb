@@ -8,9 +8,11 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://cdn.jsdelivr.net/npm/stimulus/dist/stimulus.umd.js"></script>
   </head>
 
-  <body>
+  <body class="bg-light-subtle">
+    <%= render 'layouts/flash_class' %>
     <%= yield %>
   </body>
 </html>
