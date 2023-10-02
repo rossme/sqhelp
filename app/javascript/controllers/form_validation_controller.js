@@ -13,7 +13,7 @@ export default class extends Controller {
 
 function validateAnswer(userAnswer, event) {
   const blacklist= ['DROP', 'DELETE', 'UPDATE', 'INSERT', 'CREATE', 'ALTER', 'DROP', 'DATABASE'];
-  const wordsInAnswer = userAnswer.split(' ');
+  const wordsInAnswer = userAnswer.replace(/[^a-zA-Z]/g, "").split(' ');
   const maliciousWords = wordsInAnswer.filter(word => blacklist.includes(word.toUpperCase()));
 
   if (maliciousWords.length > 0) {

@@ -30,7 +30,7 @@ module Exercises
       matches = MALICIOUS_QUERIES.select { |mq| user_answer.upcase.scan(/\b#{Regexp.escape(mq)}\b/).any? }
       return unless matches.any?
 
-      raise ActiveRecord::ReadOnlyError, 'Your query is a potentially malicious query'
+      raise ActiveRecord::ReadOnlyError, 'This database is strictly read-only'
     end
 
     MALICIOUS_QUERIES = %w[DROP DELETE UPDATE INSERT CREATE ALTER DROP DATABASE].freeze
