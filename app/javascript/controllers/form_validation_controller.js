@@ -12,17 +12,47 @@ export default class extends Controller {
 }
 
 function validateAnswer(userAnswer, event) {
+  const whitelist = ['SELECT'];
+  const form = document.getElementById('form-validation')
+
+  if (userAnswer.length === 0 || whitelist.some(word => !userAnswer.toUpperCase().includes(word)) ) {
+    // prevent the form from being submitted
+    event.preventDefault();
+
+    // remove the text from the form
+    const textArea = document.getElementById('exercise_user_answer');
+    textArea.value = "";
+
+    // display an alert to the user
+    return form.innerHTML = "Your query must contain a SELECT statement.";
+  }
+
+  // fetch the list of blacklisted words
   const blacklist= ['DROP', 'DELETE', 'UPDATE', 'INSERT', 'CREATE', 'ALTER', 'DROP', 'DATABASE'];
   const wordsInAnswer = userAnswer.replace(/[^a-zA-Z]/g, "").split(' ');
   const maliciousWords = wordsInAnswer.filter(word => blacklist.includes(word.toUpperCase()));
 
   if (maliciousWords.length > 0) {
+    // prevent the form from being submitted
     event.preventDefault();
-    return alert("Your query contains " + maliciousWords.join(', ') + ". It does not meet the conditions for inclusion. Please review your answer.");
+
+    // remove the text from the form
+    const textArea = document.getElementById('exercise_user_answer');
+    textArea.value = "";
+
+    // display an alert to the user
+    return form.innerHTML = "Your query contains " + maliciousWords.join(', ') + ".";
   }
 
   if (userAnswer.length > 100) {
+    // prevent the form from being submitted
     event.preventDefault();
-    return alert("Your query must contain a maximum of 100 characters. It does not meet the conditions for inclusion. Please review your answer.");
+
+    // remove the text from the form
+    const textArea = document.getElementById('exercise_user_answer');
+    textArea.value = "";
+
+    // display an alert to the user
+    return form.innerHTML = "Your query must contain a maximum of 100 characters.";
   }
 }
