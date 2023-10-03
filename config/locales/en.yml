@@ -33,3 +33,6 @@ en:
   hello: "Hello world"
   errors:
     message: 'Invalid %{class} detected. Please try again.'
+  exercises:
+    errors:
+      query_error: 'Your query answer "%{user_answer}" was incorrect. Please try again.'

@@ -3,5 +3,5 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
-  connects_to database: { writing: Rails.env.to_sym, reading: Rails.env.to_sym }
+  connects_to database: { writing: :primary, reading: :primary_replica }
 end

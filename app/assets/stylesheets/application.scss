@@ -1,0 +1,54 @@
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
+
+/* Basic styling for the code editor */
+.overflow-hidden {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sql-editor {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  width: auto; /* Adjust the width as needed */
+}
+
+.editor-wrapper {
+  display: flex; /* Use flexbox layout */
+}
+
+.line-numbers {
+  background-color: #fcfcfd;
+  padding: 6px;
+  font-family: "Courier New", Courier, monospace;
+  border-right: 1px solid #ccc;
+  min-height: 80px; /* Adjust the height as needed */
+  text-align: right;
+  user-select: none; /* Prevent text selection in line numbers */
+}
+
+.code {
+  border: none;
+  outline: none;
+  resize: none;
+  padding-left: 12px;
+  padding-top: 5px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  line-height: 1.67em;
+  max-height: calc(9 * 1.67em); /* Maximum height for 8 lines */
+  min-height: auto; /* Adjust the height as needed */
+  min-width: 90%; /* Adjust the width as needed */
+  /* Remove the 'overflow' property to disable vertical scrolling */
+}
+
+/* Style individual line numbers */
+.line-numbers span {
+  display: block;
+  font-size: 16px;
+  line-height: 1.67em;
+  max-height: calc(9 * 1.67em); /* Maximum height for 8 lines */
+  min-height: auto; /* Adjust the height as needed */
+}
