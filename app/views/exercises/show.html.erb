@@ -1,10 +1,18 @@
 
-<div class="row m-4 justify-content-center">
+<div class="row m-4 justify-content-center mt-5">
   <div class="col-md-8 mb-4">
     <%= render 'exercises/partials/form' %>
 
-    <div class="">
-      <%= link_to 'Back to Exercises', exercises_path, class: 'btn btn-light text-secondary border mt-2' %>
+    <div class="d-flex mt-2">
+      <div class="">
+        <%= link_to 'Index', exercises_path, class: 'btn btn-light text-secondary border mt-2' %>
+      </div>
+
+      <div class="ms-auto">
+        <% if @next_exercise %>
+          <%= link_to 'Next', exercise_path(@next_exercise), class: 'btn btn-light text-secondary border mt-2 disabled', id: 'exercise_next_button' %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

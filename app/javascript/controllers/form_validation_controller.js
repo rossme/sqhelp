@@ -5,26 +5,18 @@ export default class extends Controller {
 
   validate(event) {
     const userAnswer = this.textareaTarget.value;
+    event.preventDefault();
 
     // Check if the answer contains the word "SELECT" when certain conditions are met
-    validateAnswer(userAnswer, event)
+    validateAnswer(event, userAnswer);
   }
 }
 
-function validateAnswer(userAnswer, event) {
+function validateAnswer(event, userAnswer) {
   const whitelist = ['SELECT'];
-  const form = document.getElementById('form-validation')
 
   if (userAnswer.length === 0 || whitelist.some(word => !userAnswer.toUpperCase().includes(word)) ) {
-    // prevent the form from being submitted
-    event.preventDefault();
-
-    // remove the text from the form
-    const textArea = document.getElementById('exercise_user_answer');
-    textArea.value = "";
-
-    // display an alert to the user
-    return form.innerHTML = "Your query must contain a SELECT statement.";
+    return userMessage(event, 'Your query must contain the word "SELECT".');
   }
 
   // fetch the list of blacklisted words
@@ -33,26 +25,56 @@ function validateAnswer(userAnswer, event) {
   const maliciousWords = wordsInAnswer.filter(word => blacklist.includes(word.toUpperCase()));
 
   if (maliciousWords.length > 0) {
-    // prevent the form from being submitted
-    event.preventDefault();
-
-    // remove the text from the form
-    const textArea = document.getElementById('exercise_user_answer');
-    textArea.value = "";
-
-    // display an alert to the user
-    return form.innerHTML = "Your query contains " + maliciousWords.join(', ') + ". This database is read only.";
+    return userMessage(event, 'Your query contains "' + maliciousWords.join(', ') + '". The database is read only.');
   }
 
   if (userAnswer.length > 100) {
-    // prevent the form from being submitted
-    event.preventDefault();
-
-    // remove the text from the form
-    const textArea = document.getElementById('exercise_user_answer');
-    textArea.value = "";
-
-    // display an alert to the user
-    return form.innerHTML = "Your query must contain a maximum of 100 characters.";
+    return userMessage(event, "Your query must contain a maximum of 100 characters.");
   }
+
+  // Call the exercises controller to update the exercise
+  callExercisesController(event, userAnswer)
+}
+
+function userMessage(event, message) {
+  // remove the text from the form
+  const textArea = document.getElementById('exercise_user_answer');
+  textArea.value = "";
+
+  if (message === 'Correct!') {
+    document.getElementById('exercise_next_button').classList.remove('disabled');
+  }
+
+  // display an alert to the user
+  const formValidationElement = document.getElementById('form-validation')
+  return formValidationElement.innerHTML = message;
+}
+
+function callExercisesController(event, userAnswer) {
+  const exerciseUrl = '/exercises';
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // Get the CSRF token from the meta tag
+
+  fetch(exerciseUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'X-CSRF-Token': csrfToken, // Include the CSRF token in the headers
+    },
+    body: JSON.stringify({
+      exercise: {
+        exercise_id: event.target.dataset.exerciseId,
+        user_answer: userAnswer
+      }
+    })
+  })
+  .then(response => response.json()) // Parse the JSON response into a JavaScript object
+  .then(data => {
+    // Show the user the result of their query
+    userMessage(event, data.message);
+  })
+  .catch(error => {
+    // Catch any errors that occurred during the fetch
+    console.error('Error:', error);
+  });
 }

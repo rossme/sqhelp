@@ -2,21 +2,23 @@
 class ExercisesController < ApplicationController
 
   def index
-    @exercises = Exercise.all
+    @exercises = Exercise.all.order(:id)
   end
 
   def show
-    @exercise = Exercise.find_by(id: params[:id])
+    @exercise = Exercise.find(params[:id])
+    @next_exercise = Exercise.where('id > ?', @exercise.id).first
   end
 
   def create
     service = Exercises::ExerciseService.new(user_answer: exercise_params[:user_answer], exercise_id: exercise_params[:exercise_id]).call
+
+    # handled by Stimulus controller
     if service.query_errors.any?
-      flash[:alert] = service.query_errors.join(', ')
+      render json: { message: service.query_errors.join(', ') }, status: :unprocessable_entity
     else
-      flash[:notice] = 'Correct!'
+      render json: { message: 'Correct!' }, status: :ok
     end
-    redirect_to exercise_path(exercise_params[:exercise_id])
   end
 
   private
