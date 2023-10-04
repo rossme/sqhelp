@@ -3,13 +3,37 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["textarea"]
 
+  limit(event) {
+    limitCharacters(this.textareaTarget, 30);
+  }
+
   validate(event) {
     const userAnswer = this.textareaTarget.value;
+    // Prevent the default form submission behavior
     event.preventDefault();
 
     // Check if the answer contains the word "SELECT" when certain conditions are met
     validateAnswer(event, userAnswer);
   }
+}
+
+// Limit the number of characters and lines in the textarea
+function limitCharacters(textarea, lineCharacterLimit) {
+  const lines = textarea.value.split('\n');
+  if (lines.length > 8) {
+    // If there are more than 8 lines, remove the extra lines
+    lines.length = 8;
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].length > lineCharacterLimit) {
+      // If a line exceeds the character limit, truncate it
+      lines[i] = lines[i].slice(0, lineCharacterLimit);
+    }
+  }
+
+  // Update the textarea's value with the modified lines
+  textarea.value = lines.join('\n');
 }
 
 function validateAnswer(event, userAnswer) {
