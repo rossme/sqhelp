@@ -13,16 +13,11 @@
         <div class="editor-wrapper">
           <div class="line-numbers">
             <!-- Fixed line numbers from 1 to 8 -->
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>5</span>
-            <span>6</span>
-            <span>7</span>
-            <span>8</span>
+            <% (1..8).each do |n| %>
+              <span><%= n %></span>
+            <% end %>
           </div>
-          <%= form.text_area :user_answer, class: "code overflow-hidden", rows: 8, data: { target: "form-validation.textarea" }, oninput: "limitCharacters(this, 50);" %>
+          <%= form.text_area :user_answer, class: "code overflow-hidden", rows: 8, data: { target: "form-validation.textarea", action: "form-validation#limit" } %>
         </div>
       </div>
       <div class="d-flex">
@@ -36,23 +31,3 @@
     <% end %>
   </div>
 </div>
-
-<script>
-  function limitCharacters(textarea, lineCharacterLimit) {
-    const lines = textarea.value.split('\n');
-    if (lines.length > 8) {
-        // If there are more than 8 lines, remove the extra lines
-        lines.length = 8;
-    }
-
-    for (let i = 0; i < lines.length; i++) {
-        if (lines[i].length > lineCharacterLimit) {
-            // If a line exceeds the character limit, truncate it
-            lines[i] = lines[i].slice(0, lineCharacterLimit);
-        }
-    }
-
-    // Update the textarea's value with the modified lines
-    textarea.value = lines.join('\n');
-  }
-</script>
