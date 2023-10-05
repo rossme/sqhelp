@@ -4,7 +4,9 @@
     <h6 class="lead text-center pt-2">SQL Exercise <%= @exercise.id %></h6>
   </div>
   <div class="row card-body m-4">
-    <code class="pb-2 text-secondary"><%= @exercise.description %></code>
+    <!-- Validation message -->
+    <code class='pb-2 code' id="form-validation"></code>
+    <code class="pb-2 text-dark"><%= @exercise.description %></code>
 
     <%= form_with model: @exercise, data: { controller: "form-validation" } do |form| %>
       <%= form.hidden_field :exercise_id, value: @exercise.id %>
@@ -20,14 +22,35 @@
           <%= form.text_area :user_answer, class: "code overflow-hidden", rows: 8, data: { target: "form-validation.textarea", action: "form-validation#limit" } %>
         </div>
       </div>
-      <div class="d-flex">
-        <div class="mt-3 mr-2">
-          <%= form.button 'Submit', class: 'btn btn-light text-secondary border', data: { action: "form-validation#validate", exercise_id: @exercise.id } %>
+
+      <div class="d-flex mt-3 mr-2">
+        <div class="">
+          <%= form.button 'Submit', class: 'btn btn-light border text-secondary', id: "exercise_submit_button", data: { action: "form-validation#validate", exercise_id: @exercise.id } %>
         </div>
-        <div class="ms-auto mt-2 px-2">
-          <code id="form-validation"></code>
+
+        <div class="ms-auto d-none" id="exercise_next_button">
+          <% if @next_exercise %>
+            <%= link_to "Next", exercise_path(@next_exercise), class: 'btn btn-light border text-secondary' %>
+          <% end %>
         </div>
       </div>
     <% end %>
   </div>
+
+  <code class="card-footer">
+    <!-- Schema tables -->
+    <div class="mt-1 mb-2 px-2 text-secondary">
+      Tables: <i><%= @exercise.details['tables'].split(',').join(', ') %></i>
+    </div>
+
+    <!-- Hint -->
+    <div class="mt-1 px-2">
+      <div class="text-secondary pb-2" data-controller="form-validation" data-action="click->form-validation#hint" data-exercise-query="<%= @exercise.query %>">
+        <div class="pb-2">
+          Show hint <i class="fa-regular fa-circle-question"></i>
+        </div>
+      </div>
+      <div class="bg-white px-3 py-1 d-none text-dark mb-2" id="form-hint"></div>
+    </div>
+  </code>
 </div>

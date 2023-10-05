@@ -1,7 +1,17 @@
-// Custom bootstrap variables must be set or imported *before* bootstrap.
+
 @import "bootstrap";
+@import "font-awesome";
 
 /* Basic styling for the code editor */
+.redacted {
+  background-color: gray; /* Black background color */
+  color: gray; /* Text color same as background color */
+  display: inline-block;
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
+  padding: 1px 3px; /* Adjust padding to control the size of the block */
+}
+
 .overflow-hidden {
   overflow: hidden;
   white-space: nowrap;

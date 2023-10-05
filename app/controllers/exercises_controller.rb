@@ -15,9 +15,9 @@ class ExercisesController < ApplicationController
 
     # handled by Stimulus controller
     if service.query_errors.any?
-      render json: { message: service.query_errors.join(', ') }, status: :unprocessable_entity
+      render json: { message: service.query_errors.join(', '), http: 206 }, status: :partial_content
     else
-      render json: { message: 'Correct!' }, status: :ok
+      render json: { message: 'Correct!', http: 200 }, status: :ok
     end
   end
 
