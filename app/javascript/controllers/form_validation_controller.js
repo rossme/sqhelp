@@ -126,7 +126,6 @@ function callExercisesController(event, userAnswer) {
 // Show a redacted hint for the exercise
 function showRedactedHint(event, exerciseQuery) {
   const hint = document.getElementById('form-hint');
-  console.log(exerciseQuery)
 
   // Display the redacted result in the 'form-hint' div
   hint.classList.toggle('d-none');
@@ -137,7 +136,6 @@ function showRedactedHint(event, exerciseQuery) {
 function redactEveryOtherWordOrSymbol(exerciseQuery) {
   const wordsOrSymbols = exerciseQuery.split(/\s+/); // Split the input string into words or symbols
 
-  console.log(wordsOrSymbols)
   for (let i = 0; i < wordsOrSymbols.length; i++) {
     // Check if the current word or symbol should be redacted (odd position)
     if (i % 2 === 1) {
