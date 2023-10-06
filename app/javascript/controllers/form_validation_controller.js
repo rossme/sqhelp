@@ -26,9 +26,9 @@ export default class extends Controller {
 // Limit the number of characters and lines in the textarea
 function limitCharacters(textarea, lineCharacterLimit) {
   const lines = textarea.value.split('\n');
-  if (lines.length > 8) {
-    // If there are more than 8 lines, remove the extra lines
-    lines.length = 8;
+  if (lines.length > 9) {
+    // If there are more than 9 lines, remove the extra lines
+    lines.length = 9;
   }
 
   for (let i = 0; i < lines.length; i++) {
@@ -51,7 +51,7 @@ function validateAnswer(event, userAnswer) {
   }
 
   // fetch the list of blacklisted words
-  const blacklist= ['DROP', 'DELETE', 'UPDATE', 'INSERT', 'CREATE', 'ALTER', 'DROP', 'DATABASE'];
+  const blacklist= ['VALUES', 'VIEW', 'TABLE', 'SET', 'INDEX', 'DROP', 'DELETE', 'UPDATE', 'INSERT', 'CREATE', 'ALTER', 'DROP', 'DATABASE', 'COLUMN'];
   const wordsInAnswer = userAnswer.replace(/[^a-zA-Z ]/g, "").split(' ');
   const maliciousWords = wordsInAnswer.filter(word => blacklist.includes(word.toUpperCase()));
 
@@ -63,6 +63,10 @@ function validateAnswer(event, userAnswer) {
     return userMessage(event, "Your query must contain a maximum of 300 characters.");
   }
 
+  if (userAnswer.charAt(userAnswer.length - 1) !== ';') {
+    return userMessage(event, "It's always safer to end your query with a semicolon ';'.");
+  }
+
   // Call the exercises controller to update the exercise
   callExercisesController(event, userAnswer)
 }
@@ -71,9 +75,6 @@ function validateAnswer(event, userAnswer) {
 function userMessage(event, message, http_status) {
   // display an alert to the user
   const formValidationElement = document.getElementById('form-validation')
-  // remove the text from the form
-  const textArea = document.getElementById('exercise_user_answer');
-  textArea.value = "";
 
   // if the http status is 200, then the query was successful
   if (http_status === 200) {
@@ -84,13 +85,15 @@ function userMessage(event, message, http_status) {
     nextButtonElement.classList.toggle('d-none');
     formValidationElement.classList.remove('text-danger');
     formValidationElement.classList.add('text-success');
-    return formValidationElement.innerHTML = message;
+
+    const textareaTarget = event.target.closest('form').querySelector('textarea');
+    return formValidationElement.innerHTML = "🚀 " + message;
   }
 
   // display an alert to the user
   formValidationElement.classList.remove('text-success');
   formValidationElement.classList.add('text-danger');
-  return formValidationElement.innerHTML = 'PG errors: ' + message;
+  return formValidationElement.innerHTML = 'Query error: ' + message;
 }
 
 function callExercisesController(event, userAnswer) {

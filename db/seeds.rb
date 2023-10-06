@@ -11,7 +11,6 @@ Exercise.create(
     "SELECT *
     FROM customers;",
   difficulty: 1,
-  hint: '??? * ??? customers;',
   details: {
     tables: ['customers'],
     columns: ['*'],
@@ -21,13 +20,12 @@ Exercise.create(
 
 Exercise.create(
   title: 'List All Products',
-  description: "Retrieve a list of all products from the 'products' table.",
+  description: "Retrieve a list of all products from the 'products' table in ascending order by product name.",
   query:
     "SELECT *
     FROM products
     ORDER BY product_name ASC;",
   difficulty: 1,
-  hint: 'SELECT ??? FROM ??? ORDER ??? product_name ASC;',
   details: {
     tables: ['products'],
     columns: ['product_name'],
@@ -46,7 +44,6 @@ Exercise.create(
     ON customers.id = orders.customer_id
     WHERE customers.id = 1;",
   difficulty: 2,
-  hint: 'SELECT ???, ???(orders.total_amount) AS total_orders FROM customers ??? JOIN orders ON customers.id = orders.customer_id WHERE customers.id = 1;',
   details: {
     tables: %w[customers orders],
     columns: %w[customers.customer_name orders.total_amount],
@@ -62,7 +59,6 @@ Exercise.create(
     FROM products
     GROUP BY products.category;",
   difficulty: 2,
-  hint: 'SELECT ???, ???(products.price) AS avg_price FROM products ??? ??? products.category;',
   details: {
     tables: ['products'],
     columns: %w[products.category products.price],
@@ -81,7 +77,6 @@ Exercise.create(
     INNER JOIN orders ON order_details.order_id = orders.id
     GROUP BY products.category;",
   difficulty: 3,
-  hint: 'SELECT ???, ???(order_details.quantity * products.price) FROM products ??? ??? order_details ON products.id = order_details.product_id ??? orders ON order_details.order_id = orders.id;',
   details: {
     tables: %w[products order_details orders],
     columns: %w[products.category order_details.quantity products.price],
@@ -100,7 +95,6 @@ Exercise.create(
     ORDER BY total_orders DESC
     LIMIT 3;",
   difficulty: 3,
-  hint: 'SELECT ???, ???(orders.total_amount) FROM customers ??? JOIN orders ON customers.id = orders.customer_id GROUP BY customers.customer_name ??? BY total_orders ??? ??? 3;',
   details: {
     tables: %w[customers orders],
     columns: %w[customers.customer_name orders.total_amount],

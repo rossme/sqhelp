@@ -28,7 +28,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_30_145406) do
     t.text "description", default: "", null: false
     t.text "query", default: "", null: false
     t.integer "difficulty"
-    t.string "hint", default: "", null: false
     t.jsonb "details", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
