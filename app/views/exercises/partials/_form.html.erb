@@ -1,20 +1,23 @@
-
-<div class="card">
+<div class="card" xmlns="http://www.w3.org/1999/html">
   <div class="card-header">
     <h6 class="lead text-center pt-2">SQL Exercise <%= @exercise.id %></h6>
   </div>
-  <div class="row card-body m-4">
+  <div class="row card-body m-2 mt-1">
+
     <!-- Validation message -->
-    <code class='pb-2 code' id="form-validation"></code>
-    <code class="pb-2 text-dark"><%= @exercise.description %></code>
+    <code class='pb-1 code' id="form-validation">
+      &nbsp;
+    </code>
+    <code class="pb-3 text-dark"><%= @exercise.description %></code>
 
     <%= form_with model: @exercise, data: { controller: "form-validation" } do |form| %>
       <%= form.hidden_field :exercise_id, value: @exercise.id %>
 
       <div class="sql-editor">
         <div class="editor-wrapper">
+
+          <!-- Fixed line numbers from 1 to 8 -->
           <div class="line-numbers">
-            <!-- Fixed line numbers from 1 to 8 -->
             <% (1..8).each do |n| %>
               <span><%= n %></span>
             <% end %>
@@ -39,14 +42,14 @@
 
   <code class="card-footer">
     <!-- Schema tables -->
-    <div class="mt-1 mb-2 px-2 text-secondary">
+    <div class="my-3 mb-1 px-2 text-secondary">
       Tables: <i><%= @exercise.details['tables'].split(',').join(', ') %></i>
     </div>
 
     <!-- Hint -->
-    <div class="mt-1 px-2">
-      <div class="text-secondary pb-2" data-controller="form-validation" data-action="click->form-validation#hint" data-exercise-query="<%= @exercise.query %>">
-        <div class="pb-2">
+    <div class="px-2">
+      <div class="text-secondary pb-2 d-flex" data-controller="form-validation" data-action="click->form-validation#hint" data-exercise-query="<%= @exercise.query %>">
+        <div class="pb-2" style="cursor: pointer">
           Show hint <i class="fa-regular fa-circle-question"></i>
         </div>
       </div>
