@@ -1,4 +1,5 @@
-<div class="card" xmlns="http://www.w3.org/1999/html">
+<!-- Exercise form -->
+<div class="card">
   <div class="card-header">
     <h6 class="lead text-center pt-2">SQL Exercise <%= @exercise.id %></h6>
   </div>
@@ -8,8 +9,11 @@
     <code class='pb-1 code' id="form-validation">
       &nbsp;
     </code>
+
+    <!-- Exercise description -->
     <code class="pb-3 text-dark"><%= @exercise.description %></code>
 
+    <!-- Exercise query -->
     <%= form_with model: @exercise, data: { controller: "form-validation" } do |form| %>
       <%= form.hidden_field :exercise_id, value: @exercise.id %>
 
@@ -18,11 +22,11 @@
 
           <!-- Fixed line numbers from 1 to 8 -->
           <div class="line-numbers">
-            <% (1..8).each do |n| %>
+            <% (1..9).each do |n| %>
               <span><%= n %></span>
             <% end %>
           </div>
-          <%= form.text_area :user_answer, class: "code overflow-hidden", rows: 8, data: { target: "form-validation.textarea", action: "form-validation#limit" } %>
+          <%= form.text_area :user_answer, class: "code overflow-hidden text-primary", rows: 9, data: { target: "form-validation.textarea", action: "form-validation#limit" } %>
         </div>
       </div>
 
@@ -31,6 +35,7 @@
           <%= form.button 'Submit', class: 'btn btn-light border text-secondary', id: "exercise_submit_button", data: { action: "form-validation#validate", exercise_id: @exercise.id } %>
         </div>
 
+        <!-- Next exercise button -->
         <div class="ms-auto d-none" id="exercise_next_button">
           <% if @next_exercise %>
             <%= link_to "Next", exercise_path(@next_exercise), class: 'btn btn-light border text-secondary' %>

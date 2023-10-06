@@ -33,6 +33,6 @@ module Exercises
       raise ActiveRecord::ReadOnlyError, 'This database is strictly read-only'
     end
 
-    MALICIOUS_QUERIES = %w[DROP DELETE UPDATE INSERT CREATE ALTER DROP DATABASE].freeze
+    MALICIOUS_QUERIES = %w[VALUES VIEW TABLE SET INDEX ALTER DROP DELETE UPDATE INSERT CREATE DROP DATABASE COLUMN].freeze
   end
 end

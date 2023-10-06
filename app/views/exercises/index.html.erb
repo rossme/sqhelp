@@ -1,18 +1,20 @@
 
-<div class="row justify-content-center mt-5">
+<div class="row m-3 justify-content-center mt-3">
   <div class="col-md-8 mb-4">
     <div class="card">
       <div class="card-header">
         <h6 class="lead text-center pt-2">SQL Exercises</h6>
       </div>
-
-      <div class="row card-body m-4">
+      <div class="row card-body m-2 mt-1">
 
         <% @exercises.each_with_index do |exercise, index| %>
-          <code class="py-2">
-            <%= "#{index + 1}" %>. <%= link_to "#{exercise.description}", exercise_path(exercise), class: '' %>
-          </code>
-        <% end %>
+          <div class="code py-2">
+            <%= "#{index + 1}" %>. <%= link_to "#{exercise.description}", exercise_path(exercise), class: 'text-dark text-decoration-none' %>
+            <div class="small text-secondary">
+              <%= "Difficulty: #{exercise.difficulty}" %>
+            </div>
+          </div>
+      <% end %>
 
       </div>
     </div>
