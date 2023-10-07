@@ -40,25 +40,33 @@
 }
 
 .code {
+  font-size: 18px;
+  font-family: monospace;
+  line-height: 1.70em;
+  tab-size: 2;
   border: none;
   outline: none;
   resize: none;
   padding-left: 12px;
   padding-top: 5px;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 16px;
-  line-height: 1.67em;
-  max-height: calc(9 * 1.67em); /* Maximum height for 8 lines */
   min-height: auto; /* Adjust the height as needed */
   min-width: 90%; /* Adjust the width as needed */
-  /* Remove the 'overflow' property to disable vertical scrolling */
+}
+
+.validation {
+    font-family: monospace;
+    font-size: 16px;
+    line-height: 1.70em;
+    tab-size: 2;
+    min-width: 90%; /* Adjust the width as needed */
+    /* Remove the 'overflow' property to disable vertical scrolling */
 }
 
 /* Style individual line numbers */
 .line-numbers span {
   display: block;
-  font-size: 16px;
-  line-height: 1.67em;
-  max-height: calc(9 * 1.67em); /* Maximum height for 8 lines */
+  font-size: 18px;
+  line-height: 1.70em;
+  max-height: calc(9 * 1.70em); /* Maximum height for 8 lines */
   min-height: auto; /* Adjust the height as needed */
 }

@@ -64,7 +64,7 @@ function validateAnswer(event, userAnswer) {
   }
 
   if (userAnswer.charAt(userAnswer.length - 1) !== ';') {
-    return userMessage(event, "It's always safer to end your query with a semicolon ';'.");
+    return userMessage(event, "It's good practice to close your query with a semicolon ';'.");
   }
 
   // Call the exercises controller to update the exercise
@@ -137,20 +137,19 @@ function showRedactedHint(event, exerciseQuery) {
 
 // Redact every other word or symbol in the exercise query
 function redactEveryOtherWordOrSymbol(exerciseQuery) {
-  const wordsOrSymbols = exerciseQuery.split(/\s+/); // Split the input string into words or symbols
+  // Replace newline characters (\n) with <br> tags
+  exerciseQuery = exerciseQuery.replace(/\n/g, '<br>');
 
-  for (let i = 0; i < wordsOrSymbols.length; i++) {
-    // Check if the current word or symbol should be redacted (odd position)
-    if (i % 2 === 1) {
-      // Create a span element with the 'redacted' class and the redacted content
-      const redactedSpan = document.createElement('span');
-      redactedSpan.classList.add('redacted');
-      redactedSpan.textContent = wordsOrSymbols[i];
+  // Regular expression to find every other word or symbol and replace them with <span class="redacted">$1</span>
+  exerciseQuery = exerciseQuery.replace(/(\S+)(?:\s+|$)/g, function(match, word, index) {
+    return index % 2 === 1 ? ` <span class="redacted">${word}</span> ` : ` ${word} `;
+  });
 
-      // Replace the word with the redacted span
-      wordsOrSymbols[i] = redactedSpan.outerHTML;
-    }
-  }
-  // Join the redacted words or symbols back into a string
-  return wordsOrSymbols.join(' ');
+  // Replace HTML entities for < and > with the actual characters
+  exerciseQuery = exerciseQuery.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+
+  // Move <br> outside of <span></span>
+  exerciseQuery = exerciseQuery.replace(/(<span class="redacted">[^<]+)(<br>)(<\/span>)/g, '$1$3$2');
+
+  return exerciseQuery;
 }
