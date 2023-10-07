@@ -36,18 +36,19 @@ Exercise.create(
 # Difficulty Level 2
 Exercise.create(
   title: 'Order Totals for a Customer',
-  description: 'List the order total_amount (as total_orders) for a specific customer id = 1.',
+  description: 'Show the customer name and sum the order total_amount (as total_orders) for a specific customer id = 4.',
   query:
     "SELECT customers.customer_name, SUM(orders.total_amount) AS total_orders
     FROM customers
     LEFT JOIN orders
     ON customers.id = orders.customer_id
-    WHERE customers.id = 1;",
+    WHERE customers.id = 1
+    GROUP BY customers.customer_name;",
   difficulty: 2,
   details: {
     tables: %w[customers orders],
     columns: %w[customers.customer_name orders.total_amount],
-    keywords: ['SELECT', 'FROM', 'LEFT JOIN', 'ON', 'WHERE', 'SUM', 'AS']
+    keywords: ['SELECT', 'FROM', 'LEFT JOIN', 'ON', 'WHERE', 'SUM', 'AS', 'GROUP BY']
   }
 )
 
