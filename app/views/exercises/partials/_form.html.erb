@@ -1,12 +1,14 @@
 <!-- Exercise form -->
 <div class="card">
+  <!-- Card header -->
   <div class="card-header">
     <h6 class="lead text-center pt-2">SQL Exercise <%= @exercise.id %></h6>
   </div>
-  <div class="row card-body m-2 mt-1">
 
+  <!-- Card body -->
+  <div class="row card-body m-2 mt-1">
     <!-- Validation message -->
-    <code class='pb-1 code' id="form-validation">
+    <code class='pb-1 validation' id="form-validation">
       &nbsp;
     </code>
 
@@ -26,7 +28,7 @@
               <span><%= n %></span>
             <% end %>
           </div>
-          <%= form.text_area :user_answer, class: "code overflow-hidden text-primary", rows: 9, data: { target: "form-validation.textarea", action: "form-validation#limit" } %>
+          <%= form.text_area :user_answer, class: "code overflow-hidden", rows: 9, data: { target: "form-validation.textarea", action: "form-validation#limit" } %>
         </div>
       </div>
 
@@ -58,7 +60,7 @@
           Show hint <i class="fa-regular fa-circle-question"></i>
         </div>
       </div>
-      <div class="bg-white px-3 py-1 d-none text-dark mb-2" id="form-hint"></div>
+      <div class="code bg-white px-3 py-1 d-none text-dark mb-2" id="form-hint"></div>
     </div>
   </code>
 </div>
