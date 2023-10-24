@@ -27,12 +27,21 @@ module Exercises
     end
 
     def valid_query_check
-      matches = MALICIOUS_QUERIES.select { |mq| user_answer.upcase.scan(/\b#{Regexp.escape(mq)}\b/).any? }
+      matches = malicious_query_check.select { |mq| user_answer.upcase.scan(/\b#{Regexp.escape(mq)}\b/).any? }
       return unless matches.any?
 
       raise ActiveRecord::ReadOnlyError, 'This database is strictly read-only'
     end
 
-    MALICIOUS_QUERIES = %w[VALUES VIEW TABLE SET INDEX ALTER DROP DELETE UPDATE INSERT CREATE DROP DATABASE COLUMN].freeze
+    def malicious_query_check
+      blacklisted_queries = Rails.root.join('app', 'assets', 'files', 'blacklisted_queries.txt')
+      File.read(blacklisted_queries).split("\n").freeze
+    end
+
+    def safe_parse(obj)
+      JSON.parse(obj)
+    rescue JSON::ParserError => _e
+      obj
+    end
   end
 end

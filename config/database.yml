@@ -25,7 +25,6 @@ development:
   primary:
     <<: *default
     database: sqhelp_development
-    replica: false
   primary_replica:
     <<: *default
     database: sqhelp_development
@@ -91,7 +90,6 @@ production:
     database: sqhelp_production
     username: sqhelp
     password: <%= ENV["SQHELP_DATABASE_PASSWORD"] %>
-    replica: false
   primary_replica:
     <<: *default
     database: sqhelp_production

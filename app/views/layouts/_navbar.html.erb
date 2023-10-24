@@ -1,6 +1,15 @@
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container pb-1">
-    <a class="code text-secondary text-decoration-none" href="/">SQHELP</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
+
+  <div class="col-6 link-underline-opacity-0 pb-2">
+    <a class="code text-secondary text-decoration-none" href="/">SQUELCH</a>
   </div>
+  <div class="col-6 link-underline-opacity-0 text-sm-end pb-2">
+    <code>
+      <%= link_to("#{ENV['GITHUB_REPO']}", class: 'link-underline-opacity-0 text-secondary text-sm-end link-dark', target: '_blank') do %>
+        <%= github_release_details %> <i class="bi bi-github" class="text-secondary"></i>
+      <% end %>
+    </code>
+  </div>
+
 </nav>
