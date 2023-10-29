@@ -1,6 +1,14 @@
 # db/seeds.rb
 require 'faker'
 
+# Delete all records from each table before seeding
+tables = ['customers', 'exercises', 'order_details', 'orders', 'products']
+tables.each do |table|
+  puts "Deleting all records from #{table}..."
+  ActiveRecord::Base.connection.execute("DELETE FROM #{table}")
+   puts "Records successfully deleted from #{table}."
+end
+
 puts 'Seeding database with Exercises...'
 
 # Difficulty Level 1
