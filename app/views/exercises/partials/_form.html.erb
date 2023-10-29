@@ -23,12 +23,12 @@
         <div class="editor-wrapper">
 
           <!-- Fixed line numbers from 1 to 8 -->
-          <div class="line-numbers">
+          <div class="line-numbers text-dark">
             <% (1..9).each do |n| %>
               <span><%= n %></span>
             <% end %>
           </div>
-          <%= form.text_area :user_answer, class: "code overflow-hidden", rows: 9, data: { target: "form-validation.textarea", action: "form-validation#limit" } %>
+          <%= form.text_area :user_answer, class: "code bg-white text-dark overflow-hidden", rows: 9, data: { target: "form-validation.textarea", action: "form-validation#limit" } %>
         </div>
       </div>
 
@@ -60,7 +60,7 @@
           Show hint <i class="fa-regular fa-circle-question"></i>
         </div>
       </div>
-      <div class="code bg-white px-3 py-1 d-none text-dark mb-2" id="form-hint"></div>
+      <div class="code border rounded px-3 py-2 d-none text-grey mb-2" id="form-hint"></div>
     </div>
   </code>
 </div>
