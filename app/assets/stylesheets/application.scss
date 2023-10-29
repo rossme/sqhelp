@@ -4,12 +4,10 @@
 
 /* Basic styling for the code editor */
 .redacted {
-  background-color: gray; /* Black background color */
-  color: gray; /* Text color same as background color */
+  background: #DEE2E6;
   display: inline-block;
-  border-top: 2px solid white;
-  border-bottom: 2px solid white;
-  padding: 1px 3px; /* Adjust padding to control the size of the block */
+  line-height: 24px;
+  padding: 1px 2px; /* Adjust padding to control the size of the block */
 }
 
 .overflow-hidden {
