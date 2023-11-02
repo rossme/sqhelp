@@ -37,11 +37,5 @@ module Exercises
       blacklisted_queries = Rails.root.join('app', 'assets', 'files', 'blacklisted_queries.txt')
       File.read(blacklisted_queries).split("\n").freeze
     end
-
-    def safe_parse(obj)
-      JSON.parse(obj)
-    rescue JSON::ParserError => _e
-      obj
-    end
   end
 end

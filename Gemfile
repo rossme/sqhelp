@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.3'
+ruby '3.2.2'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.8'
@@ -48,9 +48,6 @@ gem 'bootsnap', require: false
 # Github API wrapper
 gem 'octokit', '~> 5.0'
 
-# Faker is a Ruby library for generating fake data
-gem 'faker'
-
 # Bootstrap styling
 gem 'bootstrap'
 
@@ -67,6 +64,8 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[ mri mingw x64_mingw ]
   gem 'dotenv-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'rubocop'
